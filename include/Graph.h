@@ -6,7 +6,6 @@
 class Graph{
 public:
     Graph(std::vector<std::vector<int>> matrix);
-    Graph();//added by Yair
     void infectNode(int nodeInd);
     bool isInfected(int nodeInd);
 private:

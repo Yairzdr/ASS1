@@ -4,20 +4,14 @@
 #include "../include/Session.h"
 #include "../include/json.hpp"
 #include "fstream"
+#include "../include/Agent.h"
+
 using json=nlohmann::json;
 using namespace std;
-Session::Session(const std::string &path) {
+Session::Session(const std::string &path):g(std::vector<std::vector<int>>()), agents() {
     std::ifstream i(path);
     json j;
     i >> j;
-    json agent;
-    json graph;
-    for (int k = 0; k != j["agents"].size(); k++) {
-        agent += j["agents"][k];
-    }
-    for (int k = 0; k != j["graph"].size(); k++) {
-        graph += j["graph"][k];
-    }
     string treeType = j["tree"];
     if (treeType == "M")
         TreeType::MaxRank;
@@ -25,13 +19,17 @@ Session::Session(const std::string &path) {
         TreeType::Cycle;
     else
         TreeType::Root;
-    vector<vector<int>>  inputGraph(graph.size());
-    for (int n = 0; n < graph.size(); n++){
-        for(int m=0;m<graph[n].size();m++) {
-            inputGraph[n][m] = graph[n][m];
-        }
+    g=Graph(j["Graph"]);
+    for(int i =0;i<j["agents"].size();++i)
+    {
+        if(j["agents"][i][0]="v")
+            Agent*
+            agents.push_back(newAgent);
+        else
+            Agent a = new ContactTracer(this);
+        agents.push_back(*a);
     }
-    g=Graph(inputGraph);
+
 }
 // this function triggers the session
 void Session::simulate() {

@@ -7,6 +7,8 @@
 // simple constructor
 Agent::Agent(Session& _session):session(_session){}
 
+
+
 // destructor
 
 // copy constructor
@@ -24,10 +26,20 @@ void Virus::act() {
 
 }
 
+Agent *Virus::clone() {
+    return new Virus(*this);
+}
+
+Virus::Virus(int nodeInd, Session &session):Agent(session),nodeInd(nodeInd){}
+
 // ContactTracer constructor overwrite
 ContactTracer::ContactTracer(Session &session) : Agent(session) {}
 
 // ContactTracer act
 void ContactTracer::act() {
 
+}
+
+Agent *ContactTracer::clone() {
+    return new ContactTracer(*this);
 }
