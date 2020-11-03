@@ -33,7 +33,7 @@ Agent *Virus::clone() {
 Virus::Virus(int nodeInd, Session &session):Agent(session),nodeInd(nodeInd){}
 
 // ContactTracer constructor overwrite
-ContactTracer::ContactTracer(Session &session) : Agent(session) {}
+
 
 // ContactTracer act
 void ContactTracer::act() {
@@ -42,4 +42,8 @@ void ContactTracer::act() {
 
 Agent *ContactTracer::clone() {
     return new ContactTracer(*this);
+}
+
+ContactTracer::ContactTracer(Session &session) : Agent(session) {
+
 }

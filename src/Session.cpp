@@ -22,12 +22,12 @@ Session::Session(const std::string &path):g(std::vector<std::vector<int>>()), ag
     g=Graph(j["Graph"]);
     for(int i =0;i<j["agents"].size();++i)
     {
+        Agent* newAgent;
         if(j["agents"][i][0]="v")
-            Agent*
-            agents.push_back(newAgent);
+            newAgent = new Virus((int)j["agents"][i][1], *this);
         else
-            Agent a = new ContactTracer(this);
-        agents.push_back(*a);
+            newAgent = new ContactTracer(*this);
+        agents.push_back(newAgent);
     }
 
 }
