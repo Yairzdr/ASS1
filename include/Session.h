@@ -29,6 +29,7 @@ private:
     Graph g;
     TreeType treeType;
     std::vector<Agent*> agents;
+    std::vector<int> infectedQueue;//Will hold the infected Queue vector
 };
 
 #endif

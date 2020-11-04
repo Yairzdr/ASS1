@@ -8,6 +8,7 @@
 
 using json=nlohmann::json;
 using namespace std;
+
 Session::Session(const std::string &path):g(std::vector<std::vector<int>>()), agents() {
     std::ifstream i(path);
     json j;
@@ -38,19 +39,20 @@ void Session::simulate() {
 
 // this function adds an agent
 void Session::addAgent(const Agent &agent) {
-    // what do we add, how to insert?
 }
 
 void Session::setGraph(const Graph &graph) {//Setter
     g = graph;
 }
-
-void Session::enqueueInfected(int) {//hmm? where is the infected queue?
-
+//pushing the given node index to the end of the infected queue vector.
+void Session::enqueueInfected(int nodeInd) {
+infectedQueue.push_back(nodeInd);
 }
-
-int Session::dequeueInfected() {//where is the infected queue?
-    return 0;
+//poping the first node in the queue and removing it.
+int Session::dequeueInfected() {
+    int pop = infectedQueue[0];
+    infectedQueue.erase(infectedQueue.begin());//removes the first element.
+    return pop;
 }
 
 // returns the TreeType Cycle/MaxRank/Root
