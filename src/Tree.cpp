@@ -2,6 +2,7 @@
 // Created by Yairzdr on 01/11/2020.
 //
 #include "../include/Tree.h"
+#include "../include/Session.h"
 // simple constructor
 Tree::Tree(int rootLabel):node(rootLabel),children(std::vector<Tree*>()) {}//not sure about exact implementation, what should get inside children?
 
@@ -12,10 +13,17 @@ void Tree::addChild(const Tree &child){
  //  children.push_back(child_ptr);
 
 }
-
-// ?????????????????? what the fuck is that?
+//Creates a new tree according to the session type.
 Tree *Tree::createTree(const Session &session, int rootLabel) {
-
+TreeType type=session.getTreeType();
+Tree* newTree;
+if(type==Cycle)
+    newTree=new CycleTree(rootLabel,0);//Make sure what cycle do we build the new tree with.
+else if(type==MaxRank)
+    newTree=new MaxRankTree(rootLabel);
+else
+    newTree=new RootTree(rootLabel);
+return newTree;
 }
 //TreeLabel getter
 int Tree::getRootLabel() {

@@ -10,7 +10,6 @@ Agent::Agent(Session& _session):session(_session){}
 
 // Virus simple constructor
 
-// Virus act
 void Virus::act() {
 
 }
