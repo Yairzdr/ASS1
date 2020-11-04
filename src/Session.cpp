@@ -39,7 +39,8 @@ void Session::simulate() {
 
 // this function adds an agent
 void Session::addAgent(const Agent &agent) {
-    //need to clone the agent using clone() and push it to the agents vector.
+    Agent* cloned = agent.clone();
+    agents.push_back(cloned);
 }
 
 void Session::setGraph(const Graph &graph) {//Setter
