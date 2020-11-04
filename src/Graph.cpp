@@ -3,25 +3,23 @@
 //
 
 #include "../include/Graph.h"
-// simple constructor
-Graph::Graph(std::vector<std::vector<int>> matrix):edges(matrix){}//make sure that it is deep copy
-// destructor
-
-// copy constructor
-
-// copy assignment operator
-
-// move constructor
-
-// move assignment operator
-
-void Graph::infectNode(int nodeInd) {
-    // this function infects a node
+//constructor
+Graph::Graph(std::vector<std::vector<int>> matrix):edges(matrix){
+    std::vector<int>infectedNodesList(matrix.size());//initilizing the infectedNodeList (that 'rememmbers' which node was infected during the session) in the size of the matrix.
 }
-
+//copy constructor
+Graph::Graph(Graph& toCopy) {
+    edges=toCopy.edges;
+    infectedNodesList=toCopy.infectedNodesList;
+    }
+// this function infects a node
+void Graph::infectNode(int nodeInd) {
+    infectedNodesList[nodeInd]=1;
+    //MAKE SURE THAT THE FUNCTION THAT CALLS infectNode ADDS INFECTED TO AGENT LIST!
+}
+// this function checks if the given node is marked as infected in the InfectedList we are keeping.
 bool Graph::isInfected(int nodeInd) {
-    // this function checks if the given node is infected
-    return false;
+    return(infectedNodesList[nodeInd]==1);
 }
 
 

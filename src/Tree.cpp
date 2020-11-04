@@ -31,8 +31,7 @@ int Tree::getRootLabel() {
 std::vector<Tree *> Tree::getChildren() {
     return children;
 }
-
-// CycleTree simple constructor
+// CycleTree constructor
 CycleTree::CycleTree(int _rootLabel, int _currCycle) : Tree(_rootLabel),currCycle(_currCycle){}
 
 // this used by the ContactTracer
@@ -46,7 +45,7 @@ int CycleTree::traceTree() {
     return 0;
 }
 
-// MaxRankTree simple constructor
+// MaxRankTree constructor
 MaxRankTree::MaxRankTree(int _rootLabel) : Tree(_rootLabel) {}
 
 // this used by the ContactTracer
@@ -54,10 +53,10 @@ int MaxRankTree::traceTree() {
     return 0;
 }
 
-// RootTree simple constructor
+// RootTree constructor
 RootTree::RootTree(int rootLabel) : Tree(rootLabel) {}
 
-// this used by the ContactTracer
+//returns the rootLabel of the tree.
 int RootTree::traceTree() {
     return getRootLabel();
 }
