@@ -8,7 +8,8 @@ class Session;
 class Tree{
 public:
     Tree(int rootLabel);
-    void addChild(const Tree& child);
+    //Tree(const Tree &other);
+    void addChild(const Tree& child) ;
     int getRootLabel();
     std::vector<Tree*> getChildren();
 

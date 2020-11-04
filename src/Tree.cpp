@@ -7,13 +7,15 @@ Tree::Tree(int rootLabel):node(rootLabel),children(std::vector<Tree*>()) {}//not
 
 
 // this function adds a child to the tree
-void Tree::addChild(const Tree &child) {
+void Tree::addChild(const Tree &child){
+//    Tree* child_ptr=(child);
+ //  children.push_back(child_ptr);
 
 }
 
 // ?????????????????? what the fuck is that?
 Tree *Tree::createTree(const Session &session, int rootLabel) {
-    return nullptr;
+
 }
 //TreeLabel getter
 int Tree::getRootLabel() {
@@ -23,6 +25,11 @@ int Tree::getRootLabel() {
 std::vector<Tree *> Tree::getChildren() {
     return children;
 }
+
+//Tree::Tree(const Tree &other) {
+
+//}
+
 // CycleTree constructor
 CycleTree::CycleTree(int _rootLabel, int _currCycle) : Tree(_rootLabel),currCycle(_currCycle){}
 
