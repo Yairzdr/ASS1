@@ -12,7 +12,7 @@ Agent::Agent(Session& _session):session(_session){}
 
 // Virus act
 void Virus::act() {
-
+//TEST
 }
 //clones a virus
 Agent* Virus::clone() const {
@@ -21,9 +21,6 @@ Agent* Virus::clone() const {
 }
 
 Virus::Virus(int nodeInd, Session &session):Agent(session),nodeInd(nodeInd){}
-
-// ContactTracer constructor overwrite
-
 
 // ContactTracer act
 void ContactTracer::act() {

@@ -10,7 +10,7 @@ public:
     virtual Agent* clone() const=0;
     
     virtual void act()=0;
-
+//TEST
 protected:
     Session& session;
 };
