@@ -34,15 +34,22 @@ std::vector<Tree *> Tree::getChildren() {
 // CycleTree constructor
 CycleTree::CycleTree(int _rootLabel, int _currCycle) : Tree(_rootLabel),currCycle(_currCycle){}
 
-// this used by the ContactTracer
+//Finds the left most children in depth (currCycle)
 int CycleTree::traceTree() {
-    int curr=currCycle;
+    int cycleCount=currCycle;//the depth required
+    int curr=getRootLabel();//initialize with root
+    int prev=getRootLabel();//initialize with root
     std::vector<Tree*> child=getChildren();
-    while(curr>0&child[0]!= nullptr)
+    while(cycleCount>0&child[0]!= nullptr)
     {
-
+    prev=curr;
+    children=children[0]->getChildren();//get the children's children array.
+    curr=children[0]->getRootLabel();//keep the current children label
+    cycleCount--;
     }
-    return 0;
+    if(cycleCount==0)//then we did not encountered a nullptr on the children array
+        return curr;
+    return prev;
 }
 
 // MaxRankTree constructor
