@@ -14,10 +14,11 @@ Agent::Agent(Session& _session):session(_session){}
 void Virus::act() {
 
 }
-
-//Agent *Virus::clone() const {
-    //return new Virus(*this);
-//}
+//clones a virus
+Agent* Virus::clone() const {
+    Agent* newCloned = new Virus(nodeInd, this->session);
+    return newCloned;
+}
 
 Virus::Virus(int nodeInd, Session &session):Agent(session),nodeInd(nodeInd){}
 
@@ -28,10 +29,11 @@ Virus::Virus(int nodeInd, Session &session):Agent(session),nodeInd(nodeInd){}
 void ContactTracer::act() {
 
 }
-
-//Agent *ContactTracer::clone() {
-//    return new ContactTracer(*this);
-//}
+//clones a virus
+Agent *ContactTracer::clone() const{
+    Agent* newCloned = new ContactTracer( this->session);
+    return newCloned;
+}
 
 ContactTracer::ContactTracer(Session &session) : Agent(session) {
 
