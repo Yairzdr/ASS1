@@ -3,16 +3,8 @@
 //
 #include "../include/Tree.h"
 // simple constructor
-Tree::Tree(int rootLabel):node(rootLabel),children() {}//not sure about exact implementation, what should get inside children?
-// destructor
+Tree::Tree(int rootLabel):node(rootLabel),children(std::vector<Tree*>()) {}//not sure about exact implementation, what should get inside children?
 
-// copy constructor
-
-// copy assignment operator
-
-// move constructor
-
-// move assignment operator
 
 // this function adds a child to the tree
 void Tree::addChild(const Tree &child) {
@@ -43,8 +35,9 @@ int CycleTree::traceTree() {
     while(cycleCount>0&child[0]!= nullptr)
     {
     prev=curr;
-    children=children[0]->getChildren();//get the children's children array.
-    curr=children[0]->getRootLabel();//keep the current children label
+    curr=child[0]->getRootLabel();//keep the current children label
+    child=child[0]->getChildren();//get the children's children array.
+
     cycleCount--;
     }
     if(cycleCount==0)//then we did not encountered a nullptr on the children array

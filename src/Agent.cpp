@@ -8,17 +8,6 @@
 Agent::Agent(Session& _session):session(_session){}
 
 
-
-// destructor
-
-// copy constructor
-
-// copy assignment operator
-
-// move constructor
-
-// move assignment operator
-
 // Virus simple constructor
 
 // Virus act
@@ -26,9 +15,9 @@ void Virus::act() {
 
 }
 
-Agent *Virus::clone() {
-    return new Virus(*this);
-}
+//Agent *Virus::clone() const {
+    //return new Virus(*this);
+//}
 
 Virus::Virus(int nodeInd, Session &session):Agent(session),nodeInd(nodeInd){}
 
@@ -40,9 +29,9 @@ void ContactTracer::act() {
 
 }
 
-Agent *ContactTracer::clone() {
-    return new ContactTracer(*this);
-}
+//Agent *ContactTracer::clone() {
+//    return new ContactTracer(*this);
+//}
 
 ContactTracer::ContactTracer(Session &session) : Agent(session) {
 
