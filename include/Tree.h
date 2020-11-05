@@ -10,6 +10,7 @@ public:
     Tree(int rootLabel);
     //Tree(const Tree &other);
     void addChild(const Tree& child) ;
+    void addChild( Tree* child) ;
     int getRootLabel();
     std::vector<Tree*> getChildren();
 
@@ -24,6 +25,7 @@ protected:
 class CycleTree: public Tree{
 public:
     CycleTree(int rootLabel, int currCycle);
+    void addChild(Tree* child) ;
     virtual int traceTree();
 private:
     int currCycle;
@@ -33,12 +35,14 @@ private:
 class MaxRankTree: public Tree{
 public:
     MaxRankTree(int rootLabel);
+    void addChild( Tree* child) ;
     virtual int traceTree();
 };
 
 class RootTree: public Tree{
 public:
     RootTree(int rootLabel);
+    void addChild(Tree* child) ;
     virtual int traceTree();
 };
 

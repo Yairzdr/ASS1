@@ -34,9 +34,8 @@ std::vector<Tree *> Tree::getChildren() {
     return children;
 }
 
-//Tree::Tree(const Tree &other) {
-
-//}
+Tree::Tree(const Tree &other):node(other.node) {
+}
 
 // CycleTree constructor
 CycleTree::CycleTree(int _rootLabel, int _currCycle) : Tree(_rootLabel),currCycle(_currCycle){}
@@ -60,6 +59,11 @@ int CycleTree::traceTree() {
     return prev;
 }
 
+void CycleTree::addChild(Tree *child) {
+    children.push_back(child);
+
+}
+
 // MaxRankTree constructor
 MaxRankTree::MaxRankTree(int _rootLabel) : Tree(_rootLabel) {}
 
@@ -68,10 +72,19 @@ int MaxRankTree::traceTree() {
     return 0;
 }
 
+void MaxRankTree::addChild(Tree *child) {
+    children.push_back(child);
+}
+
 // RootTree constructor
 RootTree::RootTree(int rootLabel) : Tree(rootLabel) {}
 
 //returns the rootLabel of the tree.
 int RootTree::traceTree() {
     return getRootLabel();
+}
+
+void RootTree::addChild(Tree *child) {
+    children.push_back(child);
+
 }
