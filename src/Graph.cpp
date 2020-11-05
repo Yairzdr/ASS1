@@ -12,6 +12,19 @@ Graph::Graph(Graph& toCopy) {
     edges=toCopy.edges;
     infectedNodesList=toCopy.infectedNodesList;
     }
+
+    void Graph::removeEdges(int j)
+{
+    for(int i=0;i<this->getSize();i++)
+    {
+        edges[i][j]=0;
+        edges[j][i]=0;
+    }
+}
+int Graph::getSize()
+{
+    return edges.size();
+}
 // this function infects a node
 void Graph::infectNode(int nodeInd) {
     infectedNodesList[nodeInd]=1;
@@ -19,7 +32,11 @@ void Graph::infectNode(int nodeInd) {
 }
 // this function checks if the given node is marked as infected in the InfectedList we are keeping.
 bool Graph::isInfected(int nodeInd) {
-    return(infectedNodesList[nodeInd]==1);
+    return(infectedNodesList[nodeInd]!=0);
+}
+
+int Graph::getEdge(int a, int b) {
+    return edges[a][b];
 }
 
 

@@ -9,16 +9,16 @@ Tree::Tree(int rootLabel):node(rootLabel),children(std::vector<Tree*>()) {}//not
 
 // this function adds a child to the tree
 void Tree::addChild(const Tree &child){
-//    Tree* child_ptr=(child);
- //  children.push_back(child_ptr);
-
+//    Tree* child_ptr= child.clone();
+//   children.push_back(child_ptr);
+//   delete child_ptr;
 }
 //Creates a new tree according to the session type.
 Tree *Tree::createTree(const Session &session, int rootLabel) {
 TreeType type=session.getTreeType();
 Tree* newTree;
 if(type==Cycle)
-    newTree=new CycleTree(rootLabel,0);//Make sure what cycle do we build the new tree with.
+    newTree=new CycleTree(rootLabel,session.currentCycleNum);
 else if(type==MaxRank)
     newTree=new MaxRankTree(rootLabel);
 else
@@ -34,8 +34,8 @@ std::vector<Tree *> Tree::getChildren() {
     return children;
 }
 
-Tree::Tree(const Tree &other):node(other.node) {
-}
+//Tree::Tree(const Tree &other):node(other.node) {
+//}
 
 // CycleTree constructor
 CycleTree::CycleTree(int _rootLabel, int _currCycle) : Tree(_rootLabel),currCycle(_currCycle){}
@@ -62,6 +62,10 @@ int CycleTree::traceTree() {
 void CycleTree::addChild(Tree *child) {
     children.push_back(child);
 
+}
+
+Tree *CycleTree::clone() {
+    return new CycleTree(*this);
 }
 
 // MaxRankTree constructor

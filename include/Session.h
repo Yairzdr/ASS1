@@ -20,11 +20,12 @@ public:
     void simulate();
     void addAgent(const Agent& agent);
     void setGraph(const Graph& graph);
-    
+    int currentCycleNum;
     void enqueueInfected(int);
     int dequeueInfected();
     TreeType getTreeType() const;
-    
+    void removeEdges(int j);
+    int findNotInfected(int nodeID);
 private:
     Graph g;
     TreeType treeType;
