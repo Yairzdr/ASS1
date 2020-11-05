@@ -20,6 +20,7 @@ public:
     void simulate();
     void addAgent(const Agent& agent);
     void setGraph(const Graph& graph);
+    void attack(int nodeID);
     int currentCycleNum;
     void enqueueInfected(int);
     int dequeueInfected();

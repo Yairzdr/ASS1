@@ -36,14 +36,13 @@ Session::Session(const std::string &path):g(std::vector<std::vector<int>>()), ag
 }
 // this function triggers the session
 void Session::simulate() {
-    bool terminated=false, first=false;
+    bool terminated=false, first=true;
 
     while(!terminated)
     {
         int listSize=agents.size();
         for(int i=0;i<listSize;i++)
         {
-
             agents[i]->act(*this);
         }
 
@@ -75,6 +74,8 @@ int Session::findNotInfected(int nodeID) {
         if(g.getEdge(nodeID,i)==1&!g.isInfected(i))
         {
             g.infectNode(i);
+            Agent* newAgent=new Virus(nodeID);
+            agents.push_back(newAgent);
             return i;
         }
     }
@@ -98,6 +99,13 @@ int Session::dequeueInfected() {
 // returns the TreeType Cycle/MaxRank/Root
 TreeType Session::getTreeType() const{
     return treeType;
+}
+
+void Session::attack(int nodeID) {
+    if(g.infectedNodesList[nodeID]==1)
+    {
+        enqueueInfected(nodeID);
+    }
 }
 
 
