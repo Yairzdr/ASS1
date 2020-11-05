@@ -36,16 +36,13 @@ Session::Session(const std::string &path):g(std::vector<std::vector<int>>()), ag
 }
 // this function triggers the session
 void Session::simulate() {
-    bool terminated=false, first=true;
+    bool terminated=false;
 
     while(!terminated)
     {
         int listSize=agents.size();
         for(int i=0;i<listSize;i++)
-        {
             agents[i]->act(*this);
-        }
-
         terminated=(listSize==agents.size());
         //
         currentCycleNum++;
@@ -70,15 +67,13 @@ void Session::setGraph(const Graph &graph) {//Setter
 
 int Session::findNotInfected(int nodeID) {
     for (int i = 0; i < g.getSize(); i++)
-    {
         if(g.getEdge(nodeID,i)==1&!g.isInfected(i))
         {
             g.infectNode(i);
-            Agent* newAgent=new Virus(nodeID);
+            Agent* newAgent=new Virus(i);
             agents.push_back(newAgent);
             return i;
         }
-    }
     return -1;
 }
 
@@ -103,9 +98,7 @@ TreeType Session::getTreeType() const{
 
 void Session::attack(int nodeID) {
     if(g.infectedNodesList[nodeID]==1)
-    {
         enqueueInfected(nodeID);
-    }
 }
 
 

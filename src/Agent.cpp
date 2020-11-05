@@ -11,7 +11,8 @@ Agent::Agent(){}
 
 // Virus simple constructor
 
-void Virus::act(Session& session) {
+void Virus::act(Session& session)
+{
 session.attack(this->nodeInd);
 int toInfect=session.findNotInfected(this->nodeInd);
 
