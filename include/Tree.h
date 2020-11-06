@@ -14,6 +14,7 @@ public:
     int getRootLabel();
     std::vector<Tree*> getChildren();
 
+
     static Tree* createTree(const Session& session, int rootLabel);
     virtual int traceTree()=0;
 

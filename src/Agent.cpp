@@ -29,7 +29,7 @@ void ContactTracer::act(Session& session) {
     int dequed=session.dequeueInfected();
 if(dequed!=-1) {
     Tree *actTree = Tree::createTree(session, dequed);
-    actTree.BFS();
+//    actTree.BFS(session);
     int nodeToRemove = actTree->traceTree();
     session.removeEdges(nodeToRemove);
 }
@@ -39,6 +39,4 @@ Agent* ContactTracer::clone() const {
     return new ContactTracer(*this);
 }
 
-ContactTracer::ContactTracer(){
-
-}
+ContactTracer::ContactTracer(){}

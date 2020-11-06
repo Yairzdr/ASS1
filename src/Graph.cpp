@@ -39,4 +39,14 @@ int Graph::getEdge(int a, int b) {
     return edges[a][b];
 }
 
+std::vector<int> Graph::neighboorsOfNode(int i) {
+    std::vector<int> neighboorsVector;
+    for(int j=0;j<getSize();j++)
+    {
+        if (edges[i][j]==1)
+            neighboorsVector.push_back(j);
+    }
+    return neighboorsVector;
+}
+
 

@@ -27,6 +27,7 @@ public:
     TreeType getTreeType() const;
     void removeEdges(int j);
     int findNotInfected(int nodeID);
+    std::vector<int> neighboorsOfNode(int i);
 private:
     Graph g;
     TreeType treeType;

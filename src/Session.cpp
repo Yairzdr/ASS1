@@ -101,5 +101,9 @@ void Session::attack(int nodeID) {
         enqueueInfected(nodeID);
 }
 
+std::vector<int> Session::neighboorsOfNode(int i) {
+    return g.neighboorsOfNode(i);
+}
+
 
 

@@ -3,6 +3,7 @@
 //
 #include "../include/Tree.h"
 #include "../include/Session.h"
+#include <queue>
 // simple constructor
 Tree::Tree(int rootLabel):node(rootLabel),children(std::vector<Tree*>()) {}//not sure about exact implementation, what should get inside children?
 

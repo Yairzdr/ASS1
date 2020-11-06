@@ -13,6 +13,7 @@ public:
     int getEdge(int a, int b);
     void removeEdges(int i);
     std::vector<int> infectedNodesList;//Will keep the infectedNodes(not the queue!)
+    std::vector<int> neighboorsOfNode(int i);
 private:
     std::vector<std::vector<int>> edges;
 
