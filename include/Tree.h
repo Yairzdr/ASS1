@@ -12,6 +12,7 @@ public:
     void addChild(const Tree& child) ;
     void addChild( Tree* child) ;
     int getRootLabel();
+    Tree* bfsBuild(Session& session);
     std::vector<Tree*> getChildren();
 
 
@@ -39,6 +40,7 @@ public:
     MaxRankTree(int rootLabel);
     void addChild( Tree* child) ;
     virtual int traceTree();
+
     virtual Tree* clone();
 };
 

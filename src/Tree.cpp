@@ -35,6 +35,35 @@ std::vector<Tree *> Tree::getChildren() {
     return children;
 }
 
+Tree *Tree::bfsBuild(Session &session)
+{
+    int curr;
+    bool flag= true;
+    Tree* copyT =this;
+    std::vector<bool>visited(session.getSize());//initialize with false as default
+    std::queue<Tree*> treeQueue ;
+    while(flag && !treeQueue.empty())
+    {
+        curr=(*copyT).getRootLabel();
+        std::vector<int> neighborsVec = session.neighboorsOfNode(curr);
+        for (int i = 0; i < neighborsVec.size(); i++)
+        {
+            if(!visited[neighborsVec[i]])
+            {
+                Tree *childTree = createTree(session, neighborsVec[i]);
+                copyT->addChild(childTree);
+                treeQueue.push(childTree);
+                delete(childTree);
+            }
+        }
+        copyT=treeQueue.front();
+        treeQueue.pop();
+        flag=false;
+    }
+
+}
+
+
 //Tree::Tree(const Tree &other):node(other.node) {
 //}
 

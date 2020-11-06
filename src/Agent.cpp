@@ -28,8 +28,8 @@ Virus::Virus(int nodeInd):nodeInd(nodeInd){}
 void ContactTracer::act(Session& session) {
     int dequed=session.dequeueInfected();
 if(dequed!=-1) {
-    Tree *actTree = Tree::createTree(session, dequed);
-//    actTree.BFS(session);
+    Tree* actTree = Tree::createTree(session, dequed);
+    actTree->bfsBuild(session);
     int nodeToRemove = actTree->traceTree();
     session.removeEdges(nodeToRemove);
 }
