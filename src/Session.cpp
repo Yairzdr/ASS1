@@ -105,5 +105,9 @@ std::vector<int> Session::neighboorsOfNode(int i) {
     return g.neighboorsOfNode(i);
 }
 
+int Session::getSize() {
+    return g.getSize();
+}
+
 
 
