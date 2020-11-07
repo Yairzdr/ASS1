@@ -126,6 +126,7 @@ while(!treeQueue.empty())
     }
 }
 delete checkTree;
+return currMaxInd;
 }
 
 void MaxRankTree::addChild(Tree *child) {
