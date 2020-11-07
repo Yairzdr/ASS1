@@ -103,7 +103,29 @@ MaxRankTree::MaxRankTree(int _rootLabel) : Tree(_rootLabel) {}
 
 // this used by the ContactTracer
 int MaxRankTree::traceTree() {
-    return 0;
+int currMaxInd=node;
+int currmaxChild=children.size();
+std::queue<Tree*> treeQueue;
+Tree* checkTree;
+std::vector<Tree*> childrens;
+treeQueue.push(this);
+while(!treeQueue.empty())
+{
+    checkTree=treeQueue.front();
+    treeQueue.pop();
+    childrens=checkTree->getChildren();
+    int thisRank=childrens.size();
+    if(thisRank>currmaxChild)
+    {
+        currMaxInd=checkTree->getRootLabel();
+        currmaxChild=childrens.size();
+    }
+    for(int i=0;i<childrens.size();i++)
+    {
+        treeQueue.push(childrens[i]);
+    }
+}
+delete checkTree;
 }
 
 void MaxRankTree::addChild(Tree *child) {

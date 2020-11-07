@@ -22,6 +22,7 @@ public:
 protected:
     int node;
     std::vector<Tree*> children;
+
 };
 
 class CycleTree: public Tree{
