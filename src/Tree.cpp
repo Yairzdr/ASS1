@@ -55,15 +55,16 @@ Tree *Tree::bfsBuild(Session &session)
         {
             if(!visited[neighborsVec[i]])
             {
+                visited[neighborsVec[i]]=true;
                 Tree* childTree = createTree(session,neighborsVec[i]);
                 copyT->addChild(childTree);
                 treeQueue.push(childTree);
-                delete(childTree);
+//                delete(childTree);
             }
+
         }
         flag=false;
     }
-
 }
 
 void Tree::addChild(Tree *child)

@@ -4,8 +4,10 @@
 
 #include "../include/Graph.h"
 //constructor
-Graph::Graph(std::vector<std::vector<int>> matrix):edges(matrix){
-    std::vector<int>infectedNodesList(matrix.size());//initilizing the infectedNodeList (that 'rememmbers' which node was infected during the session) in the size of the matrix.
+Graph::Graph(std::vector<std::vector<int>> matrix):edges(matrix), infectedNodesList(matrix.size()){
+//    std::vector<int>infectedNodesList(matrix.size());//initilizing the infectedNodeList (that 'rememmbers' which node was infected during the session) in the size of the matrix.
+//    for(int i=0;i<matrix.size();i++)
+//        infectedNodesList[i]=0;
 }
 //copy constructor
 Graph::Graph(Graph& toCopy) {

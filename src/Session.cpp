@@ -14,19 +14,21 @@ Session::Session(const std::string &path):g(std::vector<std::vector<int>>()), ag
     std::ifstream i(path);
     json j;
     i >> j;
-    //j=json::parse(i);
-    string treeType =(string)j["tree"];
-    if (treeType == "M")
-        TreeType::MaxRank;
-    else if (treeType == "C")
-        TreeType::Cycle;
+    string Ttype =(string)j["tree"];
+    if (Ttype == "M")
+        treeType=MaxRank;
+       // TreeType::MaxRank;
+    else if (Ttype == "C")
+        treeType=Cycle;
+    //    TreeType::Cycle;
     else
-        TreeType::Root;
+        treeType=Root;
+    //    TreeType::Root;
     g=Graph(j["graph"]);
     for(int i =0;i<j["agents"].size();++i)
     {
         Agent* newAgent;
-        if(j["agents"][i][0]=="v") {
+        if(j["agents"][i][0]=="V") {
             newAgent = new Virus((int) j["agents"][i][1]);
             g.infectNode(j["agents"][i][1]);
         }
@@ -48,18 +50,22 @@ void Session::simulate()
         terminated=(listSize==agents.size());
         currentCycleNum++;
     }
-    std::vector<int> sickNodes, graphEdges;
-    int lS = this->g.infectedNodesList.size();
-    for(int i=0;i<lS;i++)
-    {
-        if(this->g.infectedNodesList[i]==2)
-            sickNodes.push_back(i);
+//    std::vector<int> sickNodes, graphEdges;
+//    int lS = this->g.infectedNodesList.size();
+//    for(int i=0;i<lS;i++)
+//    {
+//        if(this->g.infectedNodesList[i]==2)
+//            sickNodes.push_back(i);
+//    }
+//
+    for(int i=0;i<g.getSize();i++) {
+        for (int j = 0; j < g.getSize(); j++) {
+            cout << g.getEdge(i, j) << ",";
+        }
+        cout<<endl;
     }
-
-    for(int i=0;i<g.getSize();i++)
-        for(int j=0;j<g.getSize();j++)
-            j["Graph"]=g.getEdge(i,j);
-    j["infected"]=sickNodes;
+       //     j["Graph"]=g.getEdge(i,j);
+//    j["infected"]=sickNodes;
 
 
 
@@ -101,10 +107,10 @@ g.infectedNodesList[nodeInd]=2;
 //poping the first node in the queue and removing it.
 int Session::dequeueInfected() {
     if(infectedQueue.empty())
-    return -1;
-        int pop = infectedQueue[0];
-        infectedQueue.erase(infectedQueue.begin());//removes the first element.
-        return pop;
+        return -1;
+    int pop = infectedQueue[0];
+    infectedQueue.erase(infectedQueue.begin());//removes the first element.
+    return pop;
 }
 
 // returns the TreeType Cycle/MaxRank/Root
