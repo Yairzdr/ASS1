@@ -37,18 +37,32 @@ Session::Session(const std::string &path):g(std::vector<std::vector<int>>()), ag
 
 }
 // this function triggers the session
-void Session::simulate() {
+void Session::simulate()
+{
     bool terminated=false;
-
     while(!terminated)
     {
         int listSize=agents.size();
         for(int i=0;i<listSize;i++)
             agents[i]->act(*this);
         terminated=(listSize==agents.size());
-        //
         currentCycleNum++;
     }
+    std::vector<int> sickNodes, graphEdges;
+    int lS = this->g.infectedNodesList.size();
+    for(int i=0;i<lS;i++)
+    {
+        if(this->g.infectedNodesList[i]==2)
+            sickNodes.push_back(i);
+    }
+
+    for(int i=0;i<g.getSize();i++)
+        for(int j=0;j<g.getSize();j++)
+            j["Graph"]=g.getEdge(i,j);
+    j["infected"]=sickNodes;
+
+
+
     //json output.
 }
 

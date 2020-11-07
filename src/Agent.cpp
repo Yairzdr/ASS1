@@ -14,8 +14,7 @@ Agent::Agent(){}
 void Virus::act(Session& session)
 {
 session.attack(this->nodeInd);
-int toInfect=session.findNotInfected(this->nodeInd);
-
+session.findNotInfected(this->nodeInd);
 }
 
 Agent* Virus::clone() const {
