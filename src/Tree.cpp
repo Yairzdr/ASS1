@@ -38,29 +38,37 @@ std::vector<Tree *> Tree::getChildren() {
 Tree *Tree::bfsBuild(Session &session)
 {
     int curr;
-    bool flag= true;
-    Tree* copyT =this;
+    bool flag=true;
+    Tree* copyT=this;
     std::vector<bool>visited(session.getSize());//initialize with false as default
     std::queue<Tree*> treeQueue ;
-    while(flag && !treeQueue.empty())
+    while(flag||!treeQueue.empty())
     {
+        if(!flag)
+        {
+            copyT=treeQueue.front();
+            treeQueue.pop();
+        }
         curr=(*copyT).getRootLabel();
         std::vector<int> neighborsVec = session.neighboorsOfNode(curr);
         for (int i = 0; i < neighborsVec.size(); i++)
         {
             if(!visited[neighborsVec[i]])
             {
-                Tree *childTree = createTree(session, neighborsVec[i]);
+                Tree* childTree = createTree(session,neighborsVec[i]);
                 copyT->addChild(childTree);
                 treeQueue.push(childTree);
                 delete(childTree);
             }
         }
-        copyT=treeQueue.front();
-        treeQueue.pop();
         flag=false;
     }
 
+}
+
+void Tree::addChild(Tree *child)
+{
+    children.push_back(child);
 }
 
 
@@ -87,15 +95,6 @@ int CycleTree::traceTree() {
     if(cycleCount==0)//then we did not encountered a nullptr on the children array
         return curr;
     return prev;
-}
-
-void CycleTree::addChild(Tree *child) {
-    children.push_back(child);
-
-}
-
-Tree *CycleTree::clone() {
-    return new CycleTree(*this);
 }
 
 // MaxRankTree constructor
@@ -129,10 +128,6 @@ delete checkTree;
 return currMaxInd;
 }
 
-void MaxRankTree::addChild(Tree *child) {
-    children.push_back(child);
-}
-
 // RootTree constructor
 RootTree::RootTree(int rootLabel) : Tree(rootLabel) {}
 
@@ -141,7 +136,3 @@ int RootTree::traceTree() {
     return getRootLabel();
 }
 
-void RootTree::addChild(Tree *child) {
-    children.push_back(child);
-
-}
