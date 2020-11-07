@@ -1,6 +1,7 @@
 //
 // Created by Yairzdr on 01/11/2020.
 //
+#include <iostream>
 #include "../include/Session.h"
 #include "../include/json.hpp"
 #include "fstream"
@@ -13,18 +14,19 @@ Session::Session(const std::string &path):g(std::vector<std::vector<int>>()), ag
     std::ifstream i(path);
     json j;
     i >> j;
-    string treeType = j["tree"];
+    //j=json::parse(i);
+    string treeType =(string)j["tree"];
     if (treeType == "M")
         TreeType::MaxRank;
     else if (treeType == "C")
         TreeType::Cycle;
     else
         TreeType::Root;
-    g=Graph(j["Graph"]);
+    g=Graph(j["graph"]);
     for(int i =0;i<j["agents"].size();++i)
     {
         Agent* newAgent;
-        if(j["agents"][i][0]="v") {
+        if(j["agents"][i][0]=="v") {
             newAgent = new Virus((int) j["agents"][i][1]);
             g.infectNode(j["agents"][i][1]);
         }
@@ -108,6 +110,12 @@ std::vector<int> Session::neighboorsOfNode(int i) {
 int Session::getSize() {
     return g.getSize();
 }
+
+//void Session::printAgents() {
+//for(int i=0;i<agents.size();i++)
+//{
+//}
+//}
 
 
 

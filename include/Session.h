@@ -29,6 +29,7 @@ public:
     int findNotInfected(int nodeID);
     std::vector<int> neighboorsOfNode(int i);
     int getSize();
+//    void printAgents();
 private:
     Graph g;
     TreeType treeType;
