@@ -6,7 +6,15 @@
 #include <queue>
 // simple constructor
 Tree::Tree(int rootLabel):node(rootLabel),children(std::vector<Tree*>()) {}//not sure about exact implementation, what should get inside children?
-
+Tree::~Tree()//destructor
+{
+//    while(!this->children.empty())
+//    {
+//        Tree* head = children.back();
+//        children.erase(children.begin());
+//        delete(head);
+//    }
+}
 
 // this function adds a child to the tree
 void Tree::addChild(const Tree &child){

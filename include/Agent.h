@@ -7,9 +7,10 @@
 class Agent{
 public:
     Agent();
+    //Agent(const Agent &other);
     virtual Agent* clone() const=0;
-    
     virtual void act(Session& session)=0;
+
 
 protected:
 
@@ -18,6 +19,7 @@ protected:
 class ContactTracer: public Agent{
 public:
     ContactTracer();
+    ContactTracer(const Agent &other);
     virtual Agent* clone() const;
     
     virtual void act(Session& session);
@@ -27,6 +29,7 @@ public:
 class Virus: public Agent{
 public:
     Virus(int nodeInd);
+    //Virus(const Agent &other);
     virtual Agent* clone() const;
     
     virtual void act(Session& session);

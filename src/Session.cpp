@@ -35,6 +35,7 @@ Session::Session(const std::string &path):g(std::vector<std::vector<int>>()), ag
         else
             newAgent = new ContactTracer();
         agents.push_back(newAgent);
+        //delete(newAgent);
     }
 
 }
@@ -94,6 +95,7 @@ int Session::findNotInfected(int nodeID) {
             g.infectNode(i);
             Agent* newAgent=new Virus(i);
             agents.push_back(newAgent);
+           // delete(newAgent);
             return i;
         }
     return -1;

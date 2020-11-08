@@ -8,6 +8,8 @@ class Session;
 class Tree{
 public:
     Tree(int rootLabel);
+    virtual ~Tree();
+
     void addChild(const Tree& child) ;
     void addChild(Tree* child) ;
     int getRootLabel();

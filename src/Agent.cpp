@@ -24,14 +24,17 @@ Agent* Virus::clone() const {
 Virus::Virus(int nodeInd):nodeInd(nodeInd){}
 
  //ContactTracer act
-void ContactTracer::act(Session& session) {
+void ContactTracer::act(Session& session)
+{
     int dequed=session.dequeueInfected();
-if(dequed!=-1) {
-    Tree* actTree = Tree::createTree(session, dequed);
-    actTree->bfsBuild(session);
-    int nodeToRemove = actTree->traceTree();
-    session.removeEdges(nodeToRemove);
-}
+    if(dequed!=-1)
+    {
+        Tree* actTree = Tree::createTree(session, dequed);
+        actTree->bfsBuild(session);
+        int nodeToRemove = actTree->traceTree();
+        session.removeEdges(nodeToRemove);
+        //delete(actTree);
+    }
 }
 
 Agent* ContactTracer::clone() const {
@@ -39,3 +42,7 @@ Agent* ContactTracer::clone() const {
 }
 
 ContactTracer::ContactTracer(){}
+
+ContactTracer::ContactTracer(const Agent &other) : Agent(other) {
+
+}

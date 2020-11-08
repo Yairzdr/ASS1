@@ -29,7 +29,7 @@ int Graph::getSize()
 }
 // this function infects a node
 void Graph::infectNode(int nodeInd) {
-    infectedNodesList[nodeInd]++;
+    infectedNodesList[nodeInd]=1;
     //MAKE SURE THAT THE FUNCTION THAT CALLS infectNode ADDS INFECTED TO AGENT LIST!
 }
 // this function checks if the given node is marked as infected in the InfectedList we are keeping.
