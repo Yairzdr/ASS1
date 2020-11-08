@@ -12,6 +12,8 @@ public:
     int getSize();
     int getEdge(int a, int b);
     void removeEdges(int i);
+    std::vector<std::vector<int>> getEdges();
+    std::vector<int> getInfected();
     std::vector<int> infectedNodesList;//Will keep the infectedNodes(not the queue!)
     std::vector<int> neighboorsOfNode(int i);
 private:

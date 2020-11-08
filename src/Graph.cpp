@@ -51,4 +51,17 @@ std::vector<int> Graph::neighboorsOfNode(int i) {
     return neighboorsVector;
 }
 
+std::vector<std::vector<int>> Graph::getEdges() {
+    return edges;
+}
+
+std::vector<int> Graph::getInfected() {
+    std::vector<int> result;
+    for(int i=0;i<infectedNodesList.size();i++) {
+        if (infectedNodesList[i] == 2)
+            result.push_back(i);
+    }
+        return result;
+}
+
 

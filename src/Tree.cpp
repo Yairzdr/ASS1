@@ -49,6 +49,7 @@ Tree *Tree::bfsBuild(Session &session)
     bool flag=true;
     Tree* copyT=this;
     std::vector<bool>visited(session.getSize());//initialize with false as default
+    visited[node]=true;
     std::queue<Tree*> treeQueue ;
     while(flag||!treeQueue.empty())
     {
@@ -93,7 +94,8 @@ int CycleTree::traceTree() {
     int curr=getRootLabel();//initialize with root
     int prev=getRootLabel();//initialize with root
     std::vector<Tree*> child=getChildren();
-    while(cycleCount>0&child[0]!= nullptr)
+//    while(cycleCount>0&child[0]!= nullptr)
+    while(cycleCount>0&!child.empty())
     {
     prev=curr;
     curr=child[0]->getRootLabel();//keep the current children label
@@ -101,9 +103,9 @@ int CycleTree::traceTree() {
 
     cycleCount--;
     }
-    if(cycleCount==0)//then we did not encountered a nullptr on the children array
+//    if(cycleCount==0)//then we did not encountered a nullptr on the children array
         return curr;
-    return prev;
+ //   return prev;
 }
 
 // MaxRankTree constructor
@@ -133,7 +135,7 @@ while(!treeQueue.empty())
         treeQueue.push(childrens[i]);
     }
 }
-delete checkTree;
+//delete checkTree;
 return currMaxInd;
 }
 

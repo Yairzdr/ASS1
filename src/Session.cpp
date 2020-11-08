@@ -16,7 +16,7 @@ Session::Session(const std::string &path):g(std::vector<std::vector<int>>()), ag
     i >> j;
     string Ttype =(string)j["tree"];
     if (Ttype == "M")
-        treeType=MaxRank;
+            treeType=MaxRank;
        // TreeType::MaxRank;
     else if (Ttype == "C")
         treeType=Cycle;
@@ -51,6 +51,7 @@ void Session::simulate()
         terminated=(listSize==agents.size());
         currentCycleNum++;
     }
+    int a;
 //    std::vector<int> sickNodes, graphEdges;
 //    int lS = this->g.infectedNodesList.size();
 //    for(int i=0;i<lS;i++)
@@ -65,8 +66,11 @@ void Session::simulate()
         }
         cout<<endl;
     }
-       //     j["Graph"]=g.getEdge(i,j);
-//    j["infected"]=sickNodes;
+    json output;
+    output["graph"]=g.getEdges();
+    output["infected"]=g.getInfected();
+    std::ofstream file("../output.json");
+    file << output;
 
 
 
