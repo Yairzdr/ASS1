@@ -11,6 +11,7 @@ public:
     Tree(const Tree& other);
     virtual Tree* clone()const=0 ;
     virtual ~Tree();
+    Tree & operator=(const Tree& other);
     void addChild(const Tree& child) ;
     void addChild(Tree* child) ;
     int getRootLabel();

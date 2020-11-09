@@ -90,6 +90,16 @@ void Tree::clear()
             delete children[i];
 }
 
+Tree &Tree::operator=(const Tree &other) {
+    if(this!= nullptr)
+        clear();
+    this->node=other.node;
+    for(int i=0;i<other.children.size();i++)
+    {
+        this->addChild(other.children[i]->clone());
+    }
+}
+
 
 // CycleTree constructor
 CycleTree::CycleTree(int _rootLabel, int _currCycle) : Tree(_rootLabel),currCycle(_currCycle){}
@@ -101,9 +111,9 @@ int CycleTree::traceTree() {
     std::vector<Tree*> child=getChildren();
     while(cycleCount>0&!child.empty())
     {
-    curr=child[0]->getRootLabel();//keep the current children label
-    child=child[0]->getChildren();//get the children's children array.
-    cycleCount--;
+        curr=child[0]->getRootLabel();//keep the current children label
+        child=child[0]->getChildren();//get the children's children array.
+        cycleCount--;
     }
         return curr;
 }
