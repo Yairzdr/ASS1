@@ -7,31 +7,22 @@
 class Agent{
 public:
     Agent();
-    //Agent(const Agent &other);
-    virtual Agent* clone() const=0;
+    virtual Agent* clone() const=0;//Clones (this) agent and returns a copy.
     virtual void act(Session& session)=0;
-
-
 protected:
-
 };
 
 class ContactTracer: public Agent{
 public:
     ContactTracer();
-    ContactTracer(const Agent &other);
-    virtual Agent* clone() const;
-    
+    virtual Agent* clone() const;//Clones (this) agent and returns a copy.
     virtual void act(Session& session);
 };
-
 
 class Virus: public Agent{
 public:
     Virus(int nodeInd);
-    //Virus(const Agent &other);
-    virtual Agent* clone() const;
-    
+    virtual Agent* clone() const;//Clones (this) agent and returns a copy.
     virtual void act(Session& session);
 private:
     const int nodeInd;

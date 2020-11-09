@@ -41,9 +41,7 @@ Tree::~Tree()//destructor
 }
 // this function adds a child to the tree
 void Tree::addChild(const Tree &child){
-//    Tree* child_ptr= child.clone();
-//   children.push_back(child_ptr);
-//   delete child_ptr;
+
 }
 //Creates a new tree according to the session type.
 Tree *Tree::createTree(const Session &session, int rootLabel) {
@@ -104,9 +102,6 @@ void Tree::addChild(Tree *child)
     children.push_back(child);
 }
 
-
-//Tree::Tree(const Tree &other):node(other.node) {
-//}
 
 // CycleTree constructor
 CycleTree::CycleTree(int _rootLabel, int _currCycle) : Tree(_rootLabel),currCycle(_currCycle){}
