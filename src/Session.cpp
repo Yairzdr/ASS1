@@ -137,6 +137,19 @@ int Session::getSize() {
     return g.getSize();
 }
 
+Session::~Session()
+{
+    Agent* agentToRemove;
+   while(!agents.empty())
+   {
+       agentToRemove = agents.front();
+       agents.erase(agents.begin());
+       delete agentToRemove;
+   }
+
+
+}
+
 //void Session::printAgents() {
 //for(int i=0;i<agents.size();i++)
 //{

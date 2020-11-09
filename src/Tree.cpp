@@ -6,30 +6,39 @@
 #include <queue>
 // simple constructor
 Tree::Tree(int rootLabel):node(rootLabel),children(std::vector<Tree*>()) {}//not sure about exact implementation, what should get inside children?
+//Tree::~Tree()//destructor
+//{
+//    std::queue<Tree*> treeQ;
+//    Tree* copyT=this;
+//    treeQ.push(copyT);
+//    while(!treeQ.empty())
+//    {
+//        copyT=treeQ.front();
+//        treeQ.pop();
+//        //if(copyT->children.size()>0)
+//        if(!copyT->children.empty())
+//        {
+//            for (int i=0;i< copyT->children.size();i++)
+//                if (!copyT->children[i]->children.empty())
+//                    treeQ.push(copyT->children[0]);
+//            while(!copyT->children.empty())
+//            {
+//                Tree *head = copyT->children.front();
+//                copyT->children.erase(copyT->children.begin());
+//                delete head;
+//            }
+//        }
+//    }
+//}
 Tree::~Tree()//destructor
 {
-    std::queue<Tree*> treeQ;
-    Tree* copyT=this;
-    treeQ.push(copyT);
-    while(!treeQ.empty())
-    {
-        copyT=treeQ.front();
-        treeQ.pop();
-        if(!copyT->children.empty())
-        {
-            for (int i=0;i< copyT->children.size();i++)
-                if (!copyT->children[i]->children.empty())
-                    treeQ.push(copyT->children[0]);
-            while(!copyT->children.empty())
-            {
-                Tree *head = copyT->children.front();
-                copyT->children.erase(copyT->children.begin());
-                delete head;
-            }
+    for (int i=0;i<children.size();i++){
+        if (children[i]!= nullptr){
+            delete children[i];
+            //children[i]= nullptr;
         }
     }
 }
-
 // this function adds a child to the tree
 void Tree::addChild(const Tree &child){
 //    Tree* child_ptr= child.clone();
