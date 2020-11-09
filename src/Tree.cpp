@@ -6,38 +6,10 @@
 #include <queue>
 // simple constructor
 Tree::Tree(int rootLabel):node(rootLabel),children(std::vector<Tree*>()) {}//not sure about exact implementation, what should get inside children?
-//Tree::~Tree()//destructor
-//{
-//    std::queue<Tree*> treeQ;
-//    Tree* copyT=this;
-//    treeQ.push(copyT);
-//    while(!treeQ.empty())
-//    {
-//        copyT=treeQ.front();
-//        treeQ.pop();
-//        //if(copyT->children.size()>0)
-//        if(!copyT->children.empty())
-//        {
-//            for (int i=0;i< copyT->children.size();i++)
-//                if (!copyT->children[i]->children.empty())
-//                    treeQ.push(copyT->children[0]);
-//            while(!copyT->children.empty())
-//            {
-//                Tree *head = copyT->children.front();
-//                copyT->children.erase(copyT->children.begin());
-//                delete head;
-//            }
-//        }
-//    }
-//}
+
 Tree::~Tree()//destructor
 {
-    for (int i=0;i<children.size();i++){
-        if (children[i]!= nullptr){
-            delete children[i];
-            //children[i]= nullptr;
-        }
-    }
+    clear();
 }
 // this function adds a child to the tree
 void Tree::addChild(const Tree &child){
@@ -102,6 +74,22 @@ void Tree::addChild(Tree *child)
     children.push_back(child);
 }
 
+Tree::Tree(const Tree &other)
+{
+    this->node=other.node;
+    for(int i=0;i<other.children.size();i++)
+    {
+        this->addChild(other.children[i]->clone());
+    }
+}
+
+void Tree::clear()
+{
+    for (int i=0;i<children.size();i++)
+        if (children[i]!= nullptr)
+            delete children[i];
+}
+
 
 // CycleTree constructor
 CycleTree::CycleTree(int _rootLabel, int _currCycle) : Tree(_rootLabel),currCycle(_currCycle){}
@@ -110,21 +98,27 @@ CycleTree::CycleTree(int _rootLabel, int _currCycle) : Tree(_rootLabel),currCycl
 int CycleTree::traceTree() {
     int cycleCount=currCycle;//the depth required
     int curr=getRootLabel();//initialize with root
-    int prev=getRootLabel();//initialize with root
     std::vector<Tree*> child=getChildren();
-//    while(cycleCount>0&child[0]!= nullptr)
     while(cycleCount>0&!child.empty())
     {
-    prev=curr;
     curr=child[0]->getRootLabel();//keep the current children label
     child=child[0]->getChildren();//get the children's children array.
-
     cycleCount--;
     }
-//    if(cycleCount==0)//then we did not encountered a nullptr on the children array
         return curr;
- //   return prev;
 }
+
+
+
+Tree* CycleTree::clone() const
+{
+    Tree* copy= new CycleTree(this->node,this->currCycle);
+    if(!this->children.empty())
+        for (int i=0;i< this->children.size();i++)
+            copy->addChild(this->children[i]->clone());
+    return copy;
+}
+
 
 // MaxRankTree constructor
 MaxRankTree::MaxRankTree(int _rootLabel) : Tree(_rootLabel) {}
@@ -157,11 +151,29 @@ while(!treeQueue.empty())
 return currMaxInd;
 }
 
+Tree *MaxRankTree::clone() const
+{
+    Tree* copy= new MaxRankTree(this->node);
+    if(!this->children.empty())
+        for (int i=0;i< this->children.size();i++)
+            copy->addChild(this->children[i]->clone());
+    return copy;
+}
+
 // RootTree constructor
 RootTree::RootTree(int rootLabel) : Tree(rootLabel) {}
 
 //returns the rootLabel of the tree.
 int RootTree::traceTree() {
     return getRootLabel();
+}
+
+Tree *RootTree::clone() const
+{
+    Tree* copy= new RootTree(this->node);
+    if(!this->children.empty())
+        for (int i=0;i< this->children.size();i++)
+            copy->addChild(this->children[i]->clone());
+    return copy;
 }
 
