@@ -33,7 +33,7 @@ void ContactTracer::act(Session& session)
         actTree->bfsBuild(session);
         int nodeToRemove = actTree->traceTree();
         session.removeEdges(nodeToRemove);
-        //delete(actTree);
+        delete(actTree);
     }
 }
 

@@ -99,7 +99,7 @@ int Session::findNotInfected(int nodeID) {
             g.infectNode(i);
             Agent* newAgent=new Virus(i);
             agents.push_back(newAgent);
-           // delete(newAgent);
+            //delete(newAgent);
             return i;
         }
     return -1;

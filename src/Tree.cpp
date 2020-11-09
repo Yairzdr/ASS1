@@ -8,12 +8,26 @@
 Tree::Tree(int rootLabel):node(rootLabel),children(std::vector<Tree*>()) {}//not sure about exact implementation, what should get inside children?
 Tree::~Tree()//destructor
 {
-//    while(!this->children.empty())
-//    {
-//        Tree* head = children.back();
-//        children.erase(children.begin());
-//        delete(head);
-//    }
+    std::queue<Tree*> treeQ;
+    Tree* copyT=this;
+    treeQ.push(copyT);
+    while(!treeQ.empty())
+    {
+        copyT=treeQ.front();
+        treeQ.pop();
+        if(!copyT->children.empty())
+        {
+            for (int i=0;i< copyT->children.size();i++)
+                if (!copyT->children[i]->children.empty())
+                    treeQ.push(copyT->children[0]);
+            while(!copyT->children.empty())
+            {
+                Tree *head = copyT->children.front();
+                copyT->children.erase(copyT->children.begin());
+                delete head;
+            }
+        }
+    }
 }
 
 // this function adds a child to the tree
