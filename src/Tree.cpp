@@ -11,11 +11,13 @@ Tree::~Tree()//destructor
 {
     clear();
 }
-// this function adds a child to the tree
+//Adds a child to the tree - not used. used a addChild function that gets Tree*.
 void Tree::addChild(const Tree &child){
-
+Tree* cloned = child.clone();
+children.push_back(cloned);
 }
-//Creates a new tree according to the session type.
+
+//Creates a new tree according to the session treetype.
 Tree *Tree::createTree(const Session &session, int rootLabel) {
 TreeType type=session.getTreeType();
 Tree* newTree;
@@ -36,13 +38,16 @@ std::vector<Tree *> Tree::getChildren() {
     return children;
 }
 
+/*
+ * Builds a bfs tree according to the current simulation status.
+ */
 Tree *Tree::bfsBuild(Session &session)
 {
     int curr;
     bool flag=true;
     Tree* copyT=this;
     std::vector<bool>visited(session.getSize());//initialize with false as default
-    visited[node]=true;
+    visited[node]=true;//marking the root so we will not add it to any of his children
     std::queue<Tree*> treeQueue ;
     while(flag||!treeQueue.empty())
     {
@@ -52,16 +57,15 @@ Tree *Tree::bfsBuild(Session &session)
             treeQueue.pop();
         }
         curr=(*copyT).getRootLabel();
-        std::vector<int> neighborsVec = session.neighboorsOfNode(curr);
+        std::vector<int> neighborsVec = session.neighboorsOfNode(curr);//obtain the neighbors of the current node
         for (int i = 0; i < neighborsVec.size(); i++)
         {
             if(!visited[neighborsVec[i]])
             {
-                visited[neighborsVec[i]]=true;
+                visited[neighborsVec[i]]=true;//mark i as visitd
                 Tree* childTree = createTree(session,neighborsVec[i]);
                 copyT->addChild(childTree);
                 treeQueue.push(childTree);
-//                delete(childTree);
             }
 
         }
@@ -69,27 +73,22 @@ Tree *Tree::bfsBuild(Session &session)
     }
 }
 
+//this function adds a child to the tree.
 void Tree::addChild(Tree *child)
 {
     children.push_back(child);
 }
 
-Tree::Tree(const Tree &other)
-{
-    this->node=other.node;
-    for(int i=0;i<other.children.size();i++)
-    {
-        this->addChild(other.children[i]->clone());
-    }
-}
-
+//used by Destructor
 void Tree::clear()
 {
     for (int i=0;i<children.size();i++)
         if (children[i]!= nullptr)
             delete children[i];
 }
-
+/*
+ * copy assignment operator
+ */
 Tree &Tree::operator=(const Tree &other) {
     if(this!= nullptr)
         clear();
@@ -98,6 +97,31 @@ Tree &Tree::operator=(const Tree &other) {
     {
         this->addChild(other.children[i]->clone());
     }
+}
+//Move assignment
+Tree &Tree::operator=(Tree &&other) {
+    if (this!=&other) {
+        node=other.node;
+        this->clear();
+        for(int i=0;i<other.children.size();i++)
+        {
+            children.push_back(other.children[i]);
+            other.children[i]= nullptr;
+        }
+    }
+    return *this;
+}
+//move constructor
+Tree::Tree(Tree &&other):node(other.node),children(other.children.size()){
+    for(int i=0;i<other.children.size();i++)
+    {
+        children.push_back(other.children[i]);
+        other.children[i]= nullptr;
+    }
+}
+//Copy Constructor
+Tree::Tree(const Tree &other) {
+
 }
 
 
@@ -118,8 +142,7 @@ int CycleTree::traceTree() {
         return curr;
 }
 
-
-
+//clone func
 Tree* CycleTree::clone() const
 {
     Tree* copy= new CycleTree(this->node,this->currCycle);
@@ -133,7 +156,9 @@ Tree* CycleTree::clone() const
 // MaxRankTree constructor
 MaxRankTree::MaxRankTree(int _rootLabel) : Tree(_rootLabel) {}
 
-// this used by the ContactTracer
+/*
+ * Used by contact tracers-
+ */
 int MaxRankTree::traceTree() {
 int currMaxInd=node;
 int currmaxChild=children.size();
@@ -157,7 +182,6 @@ while(!treeQueue.empty())
         treeQueue.push(childrens[i]);
     }
 }
-//delete checkTree;
 return currMaxInd;
 }
 

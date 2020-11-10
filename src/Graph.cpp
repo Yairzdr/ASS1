@@ -17,8 +17,8 @@ Graph::Graph(Graph& toCopy) {
     }
 
 /*
-     *This function removes the edges that surrounds the given node.
-     */
+ *This function removes the edges that surrounds the given node.
+ */
 void Graph::removeEdges(int j){
     for(int i=0;i<this->getSize();i++)
     {

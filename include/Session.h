@@ -29,6 +29,10 @@ public:
     int findNotInfected(int nodeID);//Calls Graph::FindNotInfected.
     std::vector<int> neighboorsOfNode(int i);//calls Graph:neighboorsOfNode.
     int getSize();//Returns the size of the graph (amount of nodes in the session).
+    Session(const Session &other);//Copy constructor
+    Session(Session &&other);//Move constructor
+    Session& operator=(const Session &other);//Copy assignment
+    Session& operator=(Session &&other);//Move assignment
 private:
     Graph g;
     TreeType treeType;

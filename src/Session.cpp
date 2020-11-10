@@ -56,7 +56,7 @@ Session::Session(const std::string &path):g(std::vector<std::vector<int>>()), ag
     json output;
     output["graph"]=g.getEdges();
     output["infected"]=g.getInfected();
-    std::ofstream file("./output.json");
+    std::ofstream file("../output.json");
     file << output;
 }
 
