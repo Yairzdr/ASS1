@@ -82,7 +82,7 @@ void Tree::addChild(Tree *child)
 //used by Destructor
 void Tree::clear()
 {
-    for (int i=0;i<children.size();i++)
+    for (int i=0;i<(int)children.size();i++)
         if (children[i]!= nullptr)
             delete children[i];
 }
@@ -93,7 +93,7 @@ Tree &Tree::operator=(const Tree &other) {
     if(this!= nullptr)
         clear();
     this->node=other.node;
-    for(int i=0;i<other.children.size();i++)
+    for(int i=0;i<(int)other.children.size();i++)
     {
         this->addChild(other.children[i]->clone());
     }
@@ -103,7 +103,7 @@ Tree &Tree::operator=(Tree &&other) {
     if (this!=&other) {
         node=other.node;
         this->clear();
-        for(int i=0;i<other.children.size();i++)
+        for(int i=0;i<(int)other.children.size();i++)
         {
             children.push_back(other.children[i]);
             other.children[i]= nullptr;
@@ -113,7 +113,7 @@ Tree &Tree::operator=(Tree &&other) {
 }
 //move constructor
 Tree::Tree(Tree &&other):node(other.node),children(other.children.size()){
-    for(int i=0;i<other.children.size();i++)
+    for(int i=0;i<(int)other.children.size();i++)
     {
         children.push_back(other.children[i]);
         other.children[i]= nullptr;
@@ -122,7 +122,7 @@ Tree::Tree(Tree &&other):node(other.node),children(other.children.size()){
 //Copy Constructor
 Tree::Tree(const Tree &other) {
     node=other.node;
-    for(int i=0;i<other.children.size();i++)
+    for(int i=0;i<(int)other.children.size();i++)
     {
         children.push_back(other.children[i]->clone());
     }
@@ -152,7 +152,7 @@ Tree* CycleTree::clone() const
 {
     Tree* copy= new CycleTree(this->node,this->currCycle);
     if(!this->children.empty())
-        for (int i=0;i< this->children.size();i++)
+        for (int i=0;i< (int)this->children.size();i++)
             copy->addChild(this->children[i]->clone());
     return copy;
 }
@@ -182,7 +182,7 @@ while(!treeQueue.empty())
         currMaxInd=checkTree->getRootLabel();
         currmaxChild=childrens.size();
     }
-    for(int i=0;i<childrens.size();i++)
+    for(int i=0;i<(int)childrens.size();i++)
     {
         treeQueue.push(childrens[i]);
     }
@@ -194,7 +194,7 @@ Tree *MaxRankTree::clone() const
 {
     Tree* copy= new MaxRankTree(this->node);
     if(!this->children.empty())
-        for (int i=0;i< this->children.size();i++)
+        for (int i=0;i<(int)this->children.size();i++)
             copy->addChild(this->children[i]->clone());
     return copy;
 }
@@ -211,7 +211,7 @@ Tree *RootTree::clone() const
 {
     Tree* copy= new RootTree(this->node);
     if(!this->children.empty())
-        for (int i=0;i< this->children.size();i++)
+        for (int i=0;i<(int)this->children.size();i++)
             copy->addChild(this->children[i]->clone());
     return copy;
 }

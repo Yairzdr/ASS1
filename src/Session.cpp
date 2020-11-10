@@ -46,7 +46,7 @@ Session::Session(const std::string &path):g(std::vector<std::vector<int>>()), ag
     bool terminated=false;
     while(!terminated)//The conditions are not satesfied yet
     {
-        int listSize=agents.size();
+        int listSize=(int)agents.size();
         for(int i=0;i<listSize;i++)
             agents[i]->act(*this);
         terminated=(listSize==agents.size());//If the agents vector did not grew up during the cycle, the termination conditions are satisfied.
