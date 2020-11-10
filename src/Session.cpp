@@ -155,7 +155,7 @@ Session::~Session()
    }
 }
 //Move constructor
-Session::Session(Session &&other):g(other.g), treeType(other.treeType), infectedQueue(other.infectedQueue) {
+Session::Session(Session &&other):g(other.g), treeType(other.treeType),agents(), infectedQueue(other.infectedQueue) {
 for(int i=0;i<(int)other.agents.size();i++)
 {
     agents.push_back(other.agents[i]);
