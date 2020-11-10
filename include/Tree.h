@@ -15,7 +15,7 @@ public:
     void addChild(const Tree& child) ;//Adds a child to the tree - not used.
     void addChild(Tree* child) ;//Adds a child to the tree
     int getRootLabel();//RootLabler getter
-    Tree* bfsBuild(Session& session);//builds a bfs tree according to the current simulation status.
+    void bfsBuild(Session& session);//builds a bfs tree according to the current simulation status.
     std::vector<Tree*> getChildren();//returns the children vector
     static Tree* createTree(const Session& session, int rootLabel);
     virtual int traceTree()=0;

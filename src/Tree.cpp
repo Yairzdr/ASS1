@@ -41,7 +41,7 @@ std::vector<Tree *> Tree::getChildren() {
 /*
  * Builds a bfs tree according to the current simulation status.
  */
-Tree *Tree::bfsBuild(Session &session)
+void Tree::bfsBuild(Session &session)
 {
     int curr;
     bool flag=true;
@@ -97,6 +97,7 @@ Tree &Tree::operator=(const Tree &other) {
     {
         this->addChild(other.children[i]->clone());
     }
+    return *this;
 }
 //Move assignment
 Tree &Tree::operator=(Tree &&other) {
