@@ -13,7 +13,7 @@ using namespace std;
  * Session constructor.
  *reads the input json file, and initialize the TreeType, AgentList and the Graph edges.
  */
-Session::Session(const std::string &path):g(std::vector<std::vector<int>>()), agents(), currentCycleNum(0) {
+Session::Session(const std::string &path):currentCycleNum(0), g(std::vector<std::vector<int>>()), treeType(), agents(), infectedQueue(){
     std::ifstream i(path);
     json j;
     i >> j;
