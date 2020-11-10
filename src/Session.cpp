@@ -25,7 +25,7 @@ Session::Session(const std::string &path):g(std::vector<std::vector<int>>()), ag
     else
         treeType=Root;
     g=Graph(j["graph"]);
-    for(int i =0;i<j["agents"].size();++i)
+    for(int i =0;i<(int)j["agents"].size();++i)
     {
         Agent* newAgent;
         if(j["agents"][i][0]=="V") {
@@ -49,7 +49,7 @@ Session::Session(const std::string &path):g(std::vector<std::vector<int>>()), ag
         int listSize=(int)agents.size();
         for(int i=0;i<listSize;i++)
             agents[i]->act(*this);
-        terminated=(listSize==agents.size());//If the agents vector did not grew up during the cycle, the termination conditions are satisfied.
+        terminated=(listSize==(int)agents.size());//If the agents vector did not grew up during the cycle, the termination conditions are satisfied.
         currentCycleNum++;
     }
     //Creating the output json file.
@@ -82,8 +82,8 @@ void Session::setGraph(const Graph &graph) {//Setter
  * Creates a new Virus on the found node, and adds it to the Agent list.
  */
 int Session::findNotInfected(int nodeID) {
-    for (int i = 0; i < g.getSize(); i++)
-        if(g.getEdge(nodeID,i)==1&!g.isInfected(i))
+    for (int i = 0; i <(int)g.getSize(); i++)
+        if(g.getEdge(nodeID,i)==1&&!g.isInfected(i))
         {
             g.infectNode(i);
             Agent* newAgent=new Virus(i);
@@ -156,7 +156,7 @@ Session::~Session()
 }
 //Move constructor
 Session::Session(Session &&other):g(other.g), treeType(other.treeType), infectedQueue(other.infectedQueue) {
-for(int i=0;i<other.agents.size();i++)
+for(int i=0;i<(int)other.agents.size();i++)
 {
     agents.push_back(other.agents[i]);
     other.agents[i]= nullptr;
@@ -170,7 +170,7 @@ Session &Session::operator=(Session &&other) {
         g=other.g;
         treeType=other.treeType;
         infectedQueue=other.infectedQueue;
-        for(int i=0;i<other.agents.size();i++)
+        for(int i=0;i<(int)other.agents.size();i++)
         {
             agents.push_back(other.agents[i]);
             other.agents[i]= nullptr;
@@ -179,7 +179,7 @@ Session &Session::operator=(Session &&other) {
 }
 //clear func (delete agent list)
 void Session::clear() {
-    for(int i=0;i<agents.size();i++)
+    for(int i=0;i<(int)agents.size();i++)
     {
         delete(agents[i]);
         agents.clear();
@@ -187,7 +187,7 @@ void Session::clear() {
 }
 //Copy Constructor
 Session::Session(const Session &other): treeType(other.treeType), infectedQueue(other.infectedQueue), g(other.g) {
-    for(int i=0;i<other.agents.size();i++)
+    for(int i=0;i<(int)other.agents.size();i++)
     {
         agents.push_back(other.agents[i]->clone());
     }
@@ -200,7 +200,7 @@ Session &Session::operator=(const Session &other) {
         g=other.g;
         treeType=other.treeType;
         infectedQueue=other.infectedQueue;
-        for(int i=0;i<other.agents.size();i++)
+        for(int i=0;i<(int)other.agents.size();i++)
         {
             agents.push_back(other.agents[i]->clone());
         }

@@ -58,7 +58,7 @@ Tree *Tree::bfsBuild(Session &session)
         }
         curr=(*copyT).getRootLabel();
         std::vector<int> neighborsVec = session.neighboorsOfNode(curr);//obtain the neighbors of the current node
-        for (int i = 0; i < neighborsVec.size(); i++)
+        for (int i = 0; i < (int)neighborsVec.size(); i++)
         {
             if(!visited[neighborsVec[i]])
             {

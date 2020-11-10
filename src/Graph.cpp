@@ -56,7 +56,7 @@ int Graph::getEdge(int a, int b) {
  */
 std::vector<int> Graph::neighboorsOfNode(int i) {
     std::vector<int> neighboorsVector;
-    for(int j=0;j<getSize();j++)
+    for(int j=0;j<(int)getSize();j++)
     {
         if (edges[i][j]==1)
             neighboorsVector.push_back(j);
@@ -76,7 +76,7 @@ std::vector<std::vector<int>> Graph::getEdges(){
  */
 std::vector<int> Graph::getInfected() {
     std::vector<int> result;
-    for(int i=0;i<infectedNodesList.size();i++) {
+    for(int i=0;i<(int)infectedNodesList.size();i++) {
         if (infectedNodesList[i] == 2)
             result.push_back(i);
     }
