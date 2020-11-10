@@ -9,6 +9,7 @@ public:
     Agent();
     virtual Agent* clone() const=0;//Clones (this) agent and returns a copy.
     virtual void act(Session& session)=0;
+    virtual ~Agent();
 protected:
 };
 

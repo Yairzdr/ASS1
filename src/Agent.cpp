@@ -8,6 +8,9 @@
 //Simple constructor
 Agent::Agent(){}
 
+
+Agent::~Agent() {}
+
 //Constructor.
 Virus::Virus(int nodeInd):nodeInd(nodeInd){}
 
