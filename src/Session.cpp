@@ -155,7 +155,7 @@ Session::~Session()
    }
 }
 //Move constructor
-Session::Session(Session &&other):g(other.g), treeType(other.treeType),agents(), infectedQueue(other.infectedQueue) {
+Session::Session(Session &&other):currentCycleNum(other.currentCycleNum), g(other.g), treeType(other.treeType), agents(std::vector<Agent*>()), infectedQueue(other.infectedQueue) {
 for(int i=0;i<(int)other.agents.size();i++)
 {
     agents.push_back(other.agents[i]);
@@ -176,6 +176,7 @@ Session &Session::operator=(Session &&other) {
             other.agents[i]= nullptr;
         }
     }
+    return *this;
 }
 //clear func (delete agent list)
 void Session::clear() {
@@ -186,7 +187,7 @@ void Session::clear() {
     }
 }
 //Copy Constructor
-Session::Session(const Session &other): treeType(other.treeType), infectedQueue(other.infectedQueue), g(other.g) {
+Session::Session(const Session &other):currentCycleNum(other.currentCycleNum),g(other.g), treeType(other.treeType),agents(std::vector<Agent*>()),  infectedQueue(other.infectedQueue) {
     for(int i=0;i<(int)other.agents.size();i++)
     {
         agents.push_back(other.agents[i]->clone());
