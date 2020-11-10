@@ -33,6 +33,7 @@ public:
     Session(Session &&other);//Move constructor
     Session& operator=(const Session &other);//Copy assignment
     Session& operator=(Session &&other);//Move assignment
+    void clear();//clear func
 private:
     Graph g;
     TreeType treeType;

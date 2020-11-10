@@ -154,5 +154,58 @@ Session::~Session()
        delete agentToRemove;
    }
 }
+//Move constructor
+Session::Session(Session &&other):g(other.g), treeType(other.treeType), infectedQueue(other.infectedQueue) {
+for(int i=0;i<other.agents.size();i++)
+{
+    agents.push_back(other.agents[i]);
+    other.agents[i]= nullptr;
+}
+}
+
+//Move Assignment
+Session &Session::operator=(Session &&other) {
+    if (this!=&other){
+        this->clear();
+        g=other.g;
+        treeType=other.treeType;
+        infectedQueue=other.infectedQueue;
+        for(int i=0;i<other.agents.size();i++)
+        {
+            agents.push_back(other.agents[i]);
+            other.agents[i]= nullptr;
+        }
+    }
+}
+//clear func (delete agent list)
+void Session::clear() {
+    for(int i=0;i<agents.size();i++)
+    {
+        delete(agents[i]);
+        agents.clear();
+    }
+}
+//Copy Constructor
+Session::Session(const Session &other): treeType(other.treeType), infectedQueue(other.infectedQueue), g(other.g) {
+    for(int i=0;i<other.agents.size();i++)
+    {
+        agents.push_back(other.agents[i]->clone());
+    }
+}
+
+//Copy Assignment
+Session &Session::operator=(const Session &other) {
+    if (this!=&other){
+        this->clear();
+        g=other.g;
+        treeType=other.treeType;
+        infectedQueue=other.infectedQueue;
+        for(int i=0;i<other.agents.size();i++)
+        {
+            agents.push_back(other.agents[i]->clone());
+        }
+    }
+    return *this;
+}
 
 

@@ -10,11 +10,6 @@
  */
 Graph::Graph(std::vector<std::vector<int>> matrix):edges(matrix), infectedNodesList(matrix.size()){}
 
-//Copy constructor
-Graph::Graph(Graph& toCopy) {
-    edges=toCopy.edges;
-    infectedNodesList=toCopy.infectedNodesList;
-    }
 
 /*
  *This function removes the edges that surrounds the given node.

@@ -6,7 +6,6 @@
 class Graph{
 public:
     Graph(std::vector<std::vector<int>> matrix);
-    Graph(Graph& toCopy);//Copy constructor declaration
     void infectNode(int nodeInd);//Gets a nodeInd and infects this node (on the infectedNodeList)
     bool isInfected(int nodeInd);//Checks if a given node is infected already.
     int getSize();//returns the amount of nodes that in session.
