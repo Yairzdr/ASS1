@@ -8,7 +8,7 @@
  * Simple constructor, initiates the edges with the edges with the input matrix,
  * and the infected list at the size of the matrix.
  */
-Graph::Graph(std::vector<std::vector<int>> matrix):edges(matrix), infectedNodesList(matrix.size()){}
+Graph::Graph(std::vector<std::vector<int>> matrix):infectedNodesList(matrix.size()),edges(matrix){}
 
 
 /*
