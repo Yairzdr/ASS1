@@ -90,7 +90,7 @@ void Tree::clear()
  * copy assignment operator
  */
 Tree &Tree::operator=(const Tree &other) {
-    if(this!= nullptr)
+    if(this!= &other)
         clear();
     this->node=other.node;
     for(int i=0;i<(int)other.children.size();i++)
@@ -138,7 +138,7 @@ int CycleTree::traceTree() {
     int cycleCount=currCycle;//the depth required
     int curr=getRootLabel();//initialize with root
     std::vector<Tree*> child=getChildren();
-    while(cycleCount>0&!child.empty())
+    while(cycleCount>0&&!child.empty())
     {
         curr=child[0]->getRootLabel();//keep the current children label
         child=child[0]->getChildren();//get the children's children array.
