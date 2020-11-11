@@ -98,7 +98,7 @@ int Session::findNotInfected(int nodeID) {
  */
 void Session::enqueueInfected(int nodeInd) {
 infectedQueue.push_back(nodeInd);
-g.infectedNodesList[nodeInd]=2;//=2 means that a node is SICK (red according to the logic on the instructions).
+g.setinfectedNodesList(nodeInd,2);//=2 means that a node is SICK (red according to the logic on the instructions).
 }
 
 /*
@@ -123,7 +123,7 @@ TreeType Session::getTreeType() const{
  * //'attacks' the node - changes a node status to SICK (infected) by using enqueInfected.
  */
 void Session::attack(int nodeID) {
-    if(g.infectedNodesList[nodeID]==1)//=1 means that the node is Infected but not SICK yet. (so it should get SICK now, and inserted to the infected queue).
+    if(g.getinfectedNodesList()[nodeID]==1)//=1 means that the node is Infected but not SICK yet. (so it should get SICK now, and inserted to the infected queue).
         enqueueInfected(nodeID);
 }
 
@@ -170,11 +170,8 @@ Session &Session::operator=(Session &&other) {
         g=other.g;
         treeType=other.treeType;
         infectedQueue=other.infectedQueue;
-        for(int i=0;i<(int)other.agents.size();i++)
-        {
-            agents.push_back(other.agents[i]);
-            other.agents[i]= nullptr;
-        }
+        currentCycleNum=other.currentCycleNum;
+        agents=move(other.agents);
     }
     return *this;
 }
@@ -209,4 +206,7 @@ Session &Session::operator=(const Session &other) {
     return *this;
 }
 
+int Session::getcurrentCycleNum() const{
+    return currentCycleNum;
+}
 

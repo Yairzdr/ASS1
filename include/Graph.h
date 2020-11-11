@@ -13,10 +13,11 @@ public:
     void removeEdges(int i);//removes the edges that surrounds node I.
     std::vector<std::vector<int>> getEdges();//returns the Edges vector.
     std::vector<int> getInfected();//returns a vector that has the list of all infected nodes during the session
-    std::vector<int> infectedNodesList;//Will keep the infectedNodes(not the queue!)
+    std::vector<int> getinfectedNodesList();//getter for infectedNodesList.
+    void setinfectedNodesList(int i, int j);//changes the status of node i to j.
     std::vector<int> neighboorsOfNode(int i);//returns a list of available neighbors (those that still have a edge with this node)
 private:
+    std::vector<int> infectedNodesList;//Will keep the infectedNodes(not the queue!)
     std::vector<std::vector<int>> edges;
-
 };
 #endif

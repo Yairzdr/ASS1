@@ -22,7 +22,7 @@ Tree *Tree::createTree(const Session &session, int rootLabel) {
 TreeType type=session.getTreeType();
 Tree* newTree;
 if(type==Cycle)
-    newTree=new CycleTree(rootLabel,session.currentCycleNum);
+    newTree=new CycleTree(rootLabel,session.getcurrentCycleNum());
 else if(type==MaxRank)
     newTree=new MaxRankTree(rootLabel);
 else

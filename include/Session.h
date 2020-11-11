@@ -21,7 +21,6 @@ public:
     void addAgent(const Agent& agent);
     void setGraph(const Graph& graph);
     void attack(int nodeID);//'attacks' the node - changes a node status to SICK (infected) by using enqueInfected.
-    int currentCycleNum;//holds the current cycle. will be used on CycleTree treeTrace.
     void enqueueInfected(int);
     int dequeueInfected();
     TreeType getTreeType() const;
@@ -34,7 +33,9 @@ public:
     Session& operator=(const Session &other);//Copy assignment
     Session& operator=(Session &&other);//Move assignment
     void clear();//clear func
+    int getcurrentCycleNum() const;
 private:
+    int currentCycleNum;//holds the current cycle. will be used on CycleTree treeTrace.
     Graph g;
     TreeType treeType;
     std::vector<Agent*> agents;

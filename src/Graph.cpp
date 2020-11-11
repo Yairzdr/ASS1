@@ -83,4 +83,10 @@ std::vector<int> Graph::getInfected() {
         return result;
 }
 
+void Graph::setinfectedNodesList(int i, int j) {
+    infectedNodesList[i]=j;
+}
 
+std::vector<int> Graph::getinfectedNodesList() {
+    return infectedNodesList;
+}
