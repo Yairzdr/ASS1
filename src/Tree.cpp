@@ -104,11 +104,7 @@ Tree &Tree::operator=(Tree &&other) {
     if (this!=&other) {
         node=other.node;
         this->clear();
-        for(int i=0;i<(int)other.children.size();i++)
-        {
-            children.push_back(other.children[i]);
-            other.children[i]= nullptr;
-        }
+        children=move(other.children);
     }
     return *this;
 }
