@@ -184,7 +184,7 @@ void Session::clear() {
     }
 }
 //Copy Constructor
-Session::Session(const Session &other):currentCycleNum(other.currentCycleNum),g(other.g), treeType(other.treeType),agents(std::vector<Agent*>()),  infectedQueue(other.infectedQueue) {
+Session::Session(const Session &other):currentCycleNum(other.currentCycleNum),g(other.g), treeType(other.treeType),agents(),  infectedQueue(other.infectedQueue) {
     for(int i=0;i<(int)other.agents.size();i++)
     {
         agents.push_back(other.agents[i]->clone());

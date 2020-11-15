@@ -117,7 +117,7 @@ Tree::Tree(Tree &&other):node(other.node),children(other.children.size()){
     }
 }
 //Copy Constructor
-Tree::Tree(const Tree &other):node(other.node),children(std::vector<Tree*>(other.children.size())) {
+Tree::Tree(const Tree &other):node(other.node),children() {
     for(int i=0;i<(int)other.children.size();i++)
     {
         children.push_back(other.children[i]->clone());
